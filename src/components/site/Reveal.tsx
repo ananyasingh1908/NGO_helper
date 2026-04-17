@@ -6,13 +6,12 @@ interface RevealProps {
   delay?: number;
   /** translate distance in px */
   y?: number;
-  as?: "div" | "section" | "article" | "li";
 }
 
 /**
  * Scroll-triggered fade + rise. Respects prefers-reduced-motion.
  */
-export function Reveal({ children, className = "", delay = 0, y = 16, as: Tag = "div" }: RevealProps) {
+export function Reveal({ children, className = "", delay = 0, y = 16 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -39,20 +38,17 @@ export function Reveal({ children, className = "", delay = 0, y = 16, as: Tag = 
     return () => io.disconnect();
   }, []);
 
-  const style = {
-    transitionDelay: `${delay}ms`,
-    transform: visible ? "translate3d(0,0,0)" : `translate3d(0, ${y}px, 0)`,
-    opacity: visible ? 1 : 0,
-  } as const;
-
   return (
-    // @ts-expect-error - dynamic tag
-    <Tag
+    <div
       ref={ref}
-      style={style}
+      style={{
+        transitionDelay: `${delay}ms`,
+        transform: visible ? "translate3d(0,0,0)" : `translate3d(0, ${y}px, 0)`,
+        opacity: visible ? 1 : 0,
+      }}
       className={`transition-all duration-700 ease-out will-change-transform ${className}`}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
