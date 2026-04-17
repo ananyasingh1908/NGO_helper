@@ -25,6 +25,8 @@ function CountUp({ value }: { value: string }) {
       setDisplay(num);
       return;
     }
+    // Reset to 0 on mount so we can animate up from the client.
+    setDisplay(0);
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !startedRef.current) {
