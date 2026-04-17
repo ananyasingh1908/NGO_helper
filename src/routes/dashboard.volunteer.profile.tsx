@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Award, Clock } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/dashboard/volunteer/profile")({
   head: () => ({ meta: [{ title: "My Profile — Saarthi AI" }] }),
-  component: VolunteerProfile,
+  component: () => <RoleGuard allow="volunteer"><VolunteerProfile /></RoleGuard>,
 });
 
 const SKILLS = ["First Aid", "Logistics", "Driving", "Translation (Hindi/English/Kannada)"];

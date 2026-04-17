@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Plus, ClipboardList } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { Button } from "@/components/ui/button";
 import { UrgencyBadge, StatusBadge } from "./dashboard.admin.index";
 
 export const Route = createFileRoute("/dashboard/public/")({
   head: () => ({ meta: [{ title: "My Reports — Saarthi AI" }] }),
-  component: PublicDashboard,
+  component: () => <RoleGuard allow="public"><PublicDashboard /></RoleGuard>,
 });
 
 const MY_REPORTS = [

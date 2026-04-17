@@ -14,11 +14,12 @@ import {
   YAxis,
 } from "recharts";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { ANALYTICS_CATEGORIES, ANALYTICS_TREND, URGENCY_SPLIT } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/dashboard/admin/analytics")({
   head: () => ({ meta: [{ title: "Analytics — Saarthi AI" }] }),
-  component: AnalyticsPage,
+  component: () => <RoleGuard allow="admin"><AnalyticsPage /></RoleGuard>,
 });
 
 const PIE_COLORS = ["hsl(var(--destructive))", "var(--accent)", "var(--primary)", "var(--muted-foreground)"];

@@ -2,11 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Activity, AlertOctagon, RefreshCw, ArrowUp, Zap, TrendingUp } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Button } from "@/components/ui/button";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { SELF_HEALING_TASKS, SELF_HEALING_METRICS, ACTIVITY_TIMELINE } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/dashboard/admin/self-healing")({
   head: () => ({ meta: [{ title: "Self-Healing — Saarthi AI" }] }),
-  component: SelfHealingPage,
+  component: () => <RoleGuard allow="admin"><SelfHealingPage /></RoleGuard>,
 });
 
 const STATUS_STYLE = {

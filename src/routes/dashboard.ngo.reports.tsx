@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Upload, FileText, Download } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/dashboard/ngo/reports")({
   head: () => ({ meta: [{ title: "Reports — Saarthi AI" }] }),
-  component: ReportsPage,
+  component: () => <RoleGuard allow="ngo"><ReportsPage /></RoleGuard>,
 });
 
 const REPORTS = [

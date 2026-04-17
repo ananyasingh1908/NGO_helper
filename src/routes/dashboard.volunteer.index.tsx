@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle2, Clock, MapPin } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { Button } from "@/components/ui/button";
 import { VOLUNTEER_TASKS } from "@/lib/mock-data";
 import { StatusBadge } from "./dashboard.admin.index";
 
 export const Route = createFileRoute("/dashboard/volunteer/")({
   head: () => ({ meta: [{ title: "Volunteer Tasks — Saarthi AI" }] }),
-  component: VolunteerOverview,
+  component: () => <RoleGuard allow="volunteer"><VolunteerOverview /></RoleGuard>,
 });
 
 function VolunteerOverview() {

@@ -2,13 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ClipboardList, Users, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { Button } from "@/components/ui/button";
 import { NGO_ISSUES } from "@/lib/mock-data";
 import { UrgencyBadge, StatusBadge } from "./dashboard.admin.index";
 
 export const Route = createFileRoute("/dashboard/ngo/")({
   head: () => ({ meta: [{ title: "NGO Dashboard — Saarthi AI" }] }),
-  component: NgoOverview,
+  component: () => <RoleGuard allow="ngo"><NgoOverview /></RoleGuard>,
 });
 
 function NgoOverview() {

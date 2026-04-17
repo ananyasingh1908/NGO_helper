@@ -2,11 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardList, Users, AlertTriangle, CheckCircle2, Activity } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { ADMIN_STATS, ACTIVITY_TIMELINE, NGO_ISSUES } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/dashboard/admin/")({
   head: () => ({ meta: [{ title: "Admin Dashboard — Saarthi AI" }] }),
-  component: AdminOverview,
+  component: () => <RoleGuard allow="admin"><AdminOverview /></RoleGuard>,
 });
 
 const ICONS = [ClipboardList, Users, AlertTriangle, CheckCircle2];

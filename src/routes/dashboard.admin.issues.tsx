@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Search, Filter } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { NGO_ISSUES } from "@/lib/mock-data";
 import { UrgencyBadge, StatusBadge } from "./dashboard.admin.index";
 
 export const Route = createFileRoute("/dashboard/admin/issues")({
   head: () => ({ meta: [{ title: "All Issues — Saarthi AI" }] }),
-  component: AdminIssuesPage,
+  component: () => <RoleGuard allow="admin"><AdminIssuesPage /></RoleGuard>,
 });
 
 function AdminIssuesPage() {

@@ -2,11 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/dashboard/ngo/create")({
   head: () => ({ meta: [{ title: "Create Issue — Saarthi AI" }] }),
-  component: CreateIssuePage,
+  component: () => <RoleGuard allow="ngo"><CreateIssuePage /></RoleGuard>,
 });
 
 const CATEGORIES = ["Sanitation", "Infrastructure", "Health", "Education", "Utilities", "Welfare"];

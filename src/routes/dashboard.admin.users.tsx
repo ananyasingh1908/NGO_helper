@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Search, MoreVertical } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { RoleGuard } from "@/components/auth/RoleGuard";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/dashboard/admin/users")({
   head: () => ({ meta: [{ title: "Users & NGOs — Saarthi AI" }] }),
-  component: UsersPage,
+  component: () => <RoleGuard allow="admin"><UsersPage /></RoleGuard>,
 });
 
 const USERS = [
