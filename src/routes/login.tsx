@@ -1,130 +1,137 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Shield, Building2, HandHeart, User, Sparkles } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Shield, Building2, HandHeart, User, ArrowRight, Sparkles } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { Button } from "@/components/ui/button";
-import { useAuth, ROLE_HOME, type Role } from "@/lib/auth";
+import { Reveal } from "@/components/site/Reveal";
+import type { Role } from "@/lib/auth";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title: "Sign in — Saarthi AI" },
-      { name: "description", content: "Sign in to your Saarthi AI dashboard." },
+      {
+        name: "description",
+        content:
+          "Choose your role to sign in to Saarthi AI — Admin, NGO, Volunteer or Citizen.",
+      },
     ],
   }),
-  component: LoginPage,
+  component: LoginChoice,
 });
 
-const ROLES: {
-  value: Role;
+interface RoleCard {
+  role: Role;
+  to: string;
   title: string;
   desc: string;
-  icon: typeof Shield;
-}[] = [
-  { value: "admin", title: "Admin", desc: "Platform-wide oversight & self-healing controls", icon: Shield },
-  { value: "ngo", title: "NGO", desc: "Manage issues, tasks and volunteer assignments", icon: Building2 },
-  { value: "volunteer", title: "Volunteer", desc: "View tasks, update status, chat with NGO", icon: HandHeart },
-  { value: "public", title: "Public User", desc: "Report issues and track your submissions", icon: User },
+  icon: LucideIcon;
+  gradient: string;
+}
+
+const ROLES: RoleCard[] = [
+  {
+    role: "admin",
+    to: "/login/admin",
+    title: "Admin",
+    desc: "Platform oversight, self-healing controls and user management.",
+    icon: Shield,
+    gradient: "from-primary to-primary/80",
+  },
+  {
+    role: "ngo",
+    to: "/login/ngo",
+    title: "NGO Partner",
+    desc: "Manage issues, dispatch volunteers and view the live issues map.",
+    icon: Building2,
+    gradient: "from-emerald-600 to-primary",
+  },
+  {
+    role: "volunteer",
+    to: "/login/volunteer",
+    title: "Volunteer",
+    desc: "View tasks on the map, update status, chat with your NGO.",
+    icon: HandHeart,
+    gradient: "from-accent to-amber-500",
+  },
+  {
+    role: "public",
+    to: "/login/public",
+    title: "Citizen",
+    desc: "Report issues via form, IVR call or WhatsApp and track them.",
+    icon: User,
+    gradient: "from-sky-500 to-primary",
+  },
 ];
 
-function LoginPage() {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const [role, setRole] = useState<Role>("admin");
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    login(role);
-    navigate({ to: ROLE_HOME[role] });
-  };
-
+function LoginChoice() {
   return (
     <SiteLayout>
-      <section className="bg-section py-16 sm:py-20">
-        <div className="mx-auto grid max-w-6xl items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-5 lg:px-8">
-          <div className="lg:col-span-2 rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-8 text-primary-foreground shadow-card">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary-foreground/15">
-              <Sparkles className="h-5 w-5" />
-            </span>
-            <h1 className="mt-4 text-3xl font-bold">Welcome back to Saarthi AI</h1>
-            <p className="mt-3 text-primary-foreground/80">
-              Pick a role to preview the matching dashboard. (Mock authentication —
-              no real backend yet.)
-            </p>
-            <ul className="mt-8 space-y-3 text-sm text-primary-foreground/85">
-              <li>• Live self-healing monitoring</li>
-              <li>• Real-time task allocation</li>
-              <li>• NGO ↔ Volunteer messaging</li>
-              <li>• Issue analytics & reports</li>
-            </ul>
+      <section className="relative overflow-hidden bg-section py-16 sm:py-24">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            background:
+              "radial-gradient(800px 400px at 10% 0%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 60%), radial-gradient(600px 400px at 90% 100%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <Reveal>
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary">
+                <Sparkles className="h-3.5 w-3.5" /> Welcome back
+              </span>
+              <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
+                Sign in to Saarthi AI
+              </h1>
+              <p className="mt-3 text-base text-muted-foreground sm:text-lg">
+                Choose the portal you want to access. Each role has its own dedicated
+                workspace and features.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:gap-6">
+            {ROLES.map((r, i) => (
+              <Reveal key={r.role} delay={i * 80}>
+                <Link
+                  to={r.to}
+                  className="group relative block overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card sm:p-7"
+                >
+                  <div
+                    className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${r.gradient} opacity-80`}
+                  />
+                  <div className="flex items-start gap-4">
+                    <span
+                      className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${r.gradient} text-white shadow-soft transition-transform duration-300 group-hover:scale-110`}
+                    >
+                      <r.icon className="h-6 w-6" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-lg font-semibold">{r.title}</h2>
+                        <ArrowRight className="h-4 w-4 -translate-x-1 text-muted-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-primary" />
+                      </div>
+                      <p className="mt-1 text-sm text-muted-foreground">{r.desc}</p>
+                      <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-primary">
+                        Sign in as {r.title} →
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="lg:col-span-3 rounded-3xl bg-card p-6 shadow-card sm:p-8"
-          >
-            <h2 className="text-xl font-semibold">Sign in</h2>
-            <p className="text-sm text-muted-foreground">Select your role to continue.</p>
-
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {ROLES.map((r) => {
-                const active = role === r.value;
-                return (
-                  <button
-                    type="button"
-                    key={r.value}
-                    onClick={() => setRole(r.value)}
-                    className={`flex items-start gap-3 rounded-xl border-2 p-4 text-left transition ${
-                      active
-                        ? "border-primary bg-primary-soft"
-                        : "border-border hover:border-primary/40 hover:bg-secondary"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ${
-                        active ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground/70"
-                      }`}
-                    >
-                      <r.icon className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="font-semibold">{r.title}</p>
-                      <p className="text-xs text-muted-foreground">{r.desc}</p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="mt-6 grid gap-4">
-              <label className="text-sm font-medium">
-                Email (optional for demo)
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  className="mt-1.5 block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-              </label>
-              <label className="text-sm font-medium">
-                Password
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  className="mt-1.5 block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-              </label>
-            </div>
-
-            <Button type="submit" size="lg" className="mt-6 w-full">
-              Continue as {ROLES.find((r) => r.value === role)?.title}
-            </Button>
-            <p className="mt-3 text-center text-xs text-muted-foreground">
-              No account? Just pick a role — this is a demo experience.
+          <Reveal delay={200}>
+            <p className="mt-10 text-center text-sm text-muted-foreground">
+              No account yet? Each role onboards differently — reach out at{" "}
+              <a className="text-primary hover:underline" href="mailto:hello@saarthi.ai">
+                hello@saarthi.ai
+              </a>
+              .
             </p>
-          </form>
+          </Reveal>
         </div>
       </section>
     </SiteLayout>
