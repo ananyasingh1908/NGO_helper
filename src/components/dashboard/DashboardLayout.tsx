@@ -16,8 +16,10 @@ import {
   Plus,
   FileText,
   User,
+  Map,
+  Phone,
 } from "lucide-react";
-import { useAuth, type Role } from "@/lib/auth";
+import { useAuth, ROLE_LOGIN, type Role } from "@/lib/auth";
 import { NOTIFICATIONS } from "@/lib/mock-data";
 
 interface NavItem {
@@ -37,6 +39,7 @@ const NAV: Record<Role, NavItem[]> = {
   ],
   ngo: [
     { to: "/dashboard/ngo", label: "Overview", icon: LayoutDashboard },
+    { to: "/dashboard/ngo/map", label: "Live Map", icon: Map },
     { to: "/dashboard/ngo/issues", label: "Issues", icon: ClipboardList },
     { to: "/dashboard/ngo/create", label: "Create Issue", icon: Plus },
     { to: "/dashboard/ngo/reports", label: "Reports", icon: FileText },
@@ -44,12 +47,14 @@ const NAV: Record<Role, NavItem[]> = {
   ],
   volunteer: [
     { to: "/dashboard/volunteer", label: "My Tasks", icon: ClipboardList },
+    { to: "/dashboard/volunteer/map", label: "Live Map", icon: Map },
     { to: "/dashboard/volunteer/profile", label: "Profile", icon: User },
     { to: "/dashboard/messages", label: "Messages", icon: MessageSquare },
   ],
   public: [
     { to: "/dashboard/public", label: "My Reports", icon: ClipboardList },
     { to: "/report", label: "New Report", icon: Plus },
+    { to: "/dashboard/public/report-channels", label: "IVR & WhatsApp", icon: Phone },
   ],
 };
 
@@ -71,6 +76,8 @@ export function DashboardLayout({ children, title, subtitle }: { children: React
   useEffect(() => {
     if (!user) navigate({ to: "/login" });
   }, [user, navigate]);
+  // suppress unused warning if not used elsewhere
+  void ROLE_LOGIN;
 
   useEffect(() => {
     setOpen(false);
