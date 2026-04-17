@@ -243,3 +243,171 @@ export const MESSAGES = [
   { from: "ngo", name: "Helping Hands NGO", text: "Great! 42 packets, Shanti Nagar shelter.", time: "10:24" },
   { from: "me", name: "You", text: "On the way 🚴", time: "10:40" },
 ];
+
+// ============= LIVE MAP DATA =============
+export type Urgency = "High" | "Medium" | "Low";
+export type IssueStatus = "Open" | "In Progress" | "Resolved";
+
+export interface MapIssue {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  urgency: Urgency;
+  status: IssueStatus;
+  location: string;
+  lat: number;
+  lng: number;
+  assigned: string | null;
+  reportedAt: string;
+  source?: "form" | "ivr" | "whatsapp";
+}
+
+// Centred around Bengaluru
+export const MAP_ISSUES: MapIssue[] = [
+  {
+    id: "I-501",
+    title: "Pothole on 100ft Road",
+    description: "Large pothole near the metro pillar causing two-wheeler accidents.",
+    category: "Infrastructure",
+    urgency: "High",
+    status: "In Progress",
+    location: "Indiranagar, 100ft Road",
+    lat: 12.9719,
+    lng: 77.6412,
+    assigned: "Rohan Mehta",
+    reportedAt: "2h ago",
+    source: "form",
+  },
+  {
+    id: "I-502",
+    title: "Garbage overflow at park gate",
+    description: "Bins overflowing for 3 days, attracting stray animals.",
+    category: "Sanitation",
+    urgency: "High",
+    status: "Open",
+    location: "Cubbon Park, Gate 4",
+    lat: 12.9763,
+    lng: 77.5929,
+    assigned: null,
+    reportedAt: "45m ago",
+    source: "whatsapp",
+  },
+  {
+    id: "I-503",
+    title: "Streetlight outage — 5th Main",
+    description: "Three consecutive lights out near junction; safety concern.",
+    category: "Utilities",
+    urgency: "Medium",
+    status: "Open",
+    location: "Koramangala 5th Block",
+    lat: 12.9352,
+    lng: 77.6245,
+    assigned: null,
+    reportedAt: "5h ago",
+    source: "ivr",
+  },
+  {
+    id: "I-504",
+    title: "Water logging post-rain",
+    description: "Knee-deep water blocking access to school.",
+    category: "Drainage",
+    urgency: "High",
+    status: "In Progress",
+    location: "HSR Layout, Sector 2",
+    lat: 12.9116,
+    lng: 77.6473,
+    assigned: "Priya Iyer",
+    reportedAt: "1h ago",
+    source: "form",
+  },
+  {
+    id: "I-505",
+    title: "Stray animal feeding spot",
+    description: "Volunteer needed to coordinate weekly feeding.",
+    category: "Welfare",
+    urgency: "Low",
+    status: "Open",
+    location: "Whitefield, ITPL Main Road",
+    lat: 12.9698,
+    lng: 77.7499,
+    assigned: null,
+    reportedAt: "Yesterday",
+    source: "form",
+  },
+  {
+    id: "I-506",
+    title: "Free meal distribution drive",
+    description: "Need 6 volunteers to help serve 200 meals at the shelter.",
+    category: "Welfare",
+    urgency: "Medium",
+    status: "Open",
+    location: "Yelahanka shelter",
+    lat: 13.1007,
+    lng: 77.5963,
+    assigned: null,
+    reportedAt: "30m ago",
+    source: "ivr",
+  },
+  {
+    id: "I-507",
+    title: "Broken footpath railing",
+    description: "Sharp metal exposed near school crossing.",
+    category: "Infrastructure",
+    urgency: "Medium",
+    status: "Resolved",
+    location: "Jayanagar 4th Block",
+    lat: 12.9252,
+    lng: 77.5832,
+    assigned: "Aanya Sharma",
+    reportedAt: "Yesterday",
+    source: "form",
+  },
+  {
+    id: "I-508",
+    title: "Open manhole",
+    description: "Manhole cover missing on busy road, immediate hazard.",
+    category: "Infrastructure",
+    urgency: "High",
+    status: "Open",
+    location: "Malleshwaram 8th Cross",
+    lat: 13.0067,
+    lng: 77.5705,
+    assigned: null,
+    reportedAt: "20m ago",
+    source: "whatsapp",
+  },
+  {
+    id: "I-509",
+    title: "Tree fallen blocking lane",
+    description: "Large tree down after wind, blocking one lane of traffic.",
+    category: "Infrastructure",
+    urgency: "Medium",
+    status: "In Progress",
+    location: "BTM 2nd Stage",
+    lat: 12.9166,
+    lng: 77.6101,
+    assigned: "Arjun Verma",
+    reportedAt: "3h ago",
+    source: "form",
+  },
+];
+
+// ============= WHATSAPP / IVR CONFIG =============
+export const SUPPORT_WHATSAPP = {
+  number: "918104504618", // E.164 without '+'
+  display: "+91 81045 04618",
+};
+
+export const buildWhatsAppLink = (location: string, description: string) => {
+  const message = `Hi Saarthi AI, I want to report an issue.\n\nLocation: ${location || "_____"}\nDescription: ${description || "_____"}\n\nPlease send help.`;
+  return `https://wa.me/${SUPPORT_WHATSAPP.number}?text=${encodeURIComponent(message)}`;
+};
+
+export const IVR_MENU = [
+  { key: "1", label: "Food / hunger emergency", category: "Welfare" },
+  { key: "2", label: "Medical emergency", category: "Health" },
+  { key: "3", label: "Sanitation issue", category: "Sanitation" },
+  { key: "4", label: "Infrastructure / road hazard", category: "Infrastructure" },
+  { key: "0", label: "Speak to operator", category: "Other" },
+];

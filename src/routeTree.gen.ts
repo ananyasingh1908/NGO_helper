@@ -15,13 +15,19 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as IssuesRouteImport } from './routes/issues'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LoginVolunteerRouteImport } from './routes/login.volunteer'
+import { Route as LoginPublicRouteImport } from './routes/login.public'
+import { Route as LoginNgoRouteImport } from './routes/login.ngo'
+import { Route as LoginAdminRouteImport } from './routes/login.admin'
 import { Route as DashboardMessagesRouteImport } from './routes/dashboard.messages'
 import { Route as DashboardVolunteerIndexRouteImport } from './routes/dashboard.volunteer.index'
 import { Route as DashboardPublicIndexRouteImport } from './routes/dashboard.public.index'
 import { Route as DashboardNgoIndexRouteImport } from './routes/dashboard.ngo.index'
 import { Route as DashboardAdminIndexRouteImport } from './routes/dashboard.admin.index'
 import { Route as DashboardVolunteerProfileRouteImport } from './routes/dashboard.volunteer.profile'
+import { Route as DashboardVolunteerMapRouteImport } from './routes/dashboard.volunteer.map'
 import { Route as DashboardNgoReportsRouteImport } from './routes/dashboard.ngo.reports'
+import { Route as DashboardNgoMapRouteImport } from './routes/dashboard.ngo.map'
 import { Route as DashboardNgoIssuesRouteImport } from './routes/dashboard.ngo.issues'
 import { Route as DashboardNgoCreateRouteImport } from './routes/dashboard.ngo.create'
 import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
@@ -59,6 +65,26 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginVolunteerRoute = LoginVolunteerRouteImport.update({
+  id: '/volunteer',
+  path: '/volunteer',
+  getParentRoute: () => LoginRoute,
+} as any)
+const LoginPublicRoute = LoginPublicRouteImport.update({
+  id: '/public',
+  path: '/public',
+  getParentRoute: () => LoginRoute,
+} as any)
+const LoginNgoRoute = LoginNgoRouteImport.update({
+  id: '/ngo',
+  path: '/ngo',
+  getParentRoute: () => LoginRoute,
+} as any)
+const LoginAdminRoute = LoginAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => LoginRoute,
+} as any)
 const DashboardMessagesRoute = DashboardMessagesRouteImport.update({
   id: '/dashboard/messages',
   path: '/dashboard/messages',
@@ -90,9 +116,19 @@ const DashboardVolunteerProfileRoute =
     path: '/dashboard/volunteer/profile',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DashboardVolunteerMapRoute = DashboardVolunteerMapRouteImport.update({
+  id: '/dashboard/volunteer/map',
+  path: '/dashboard/volunteer/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardNgoReportsRoute = DashboardNgoReportsRouteImport.update({
   id: '/dashboard/ngo/reports',
   path: '/dashboard/ngo/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardNgoMapRoute = DashboardNgoMapRouteImport.update({
+  id: '/dashboard/ngo/map',
+  path: '/dashboard/ngo/map',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardNgoIssuesRoute = DashboardNgoIssuesRouteImport.update({
@@ -131,17 +167,23 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/issues': typeof IssuesRoute
-  '/login': typeof LoginRoute
+  '/login': typeof LoginRouteWithChildren
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
   '/dashboard/messages': typeof DashboardMessagesRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/ngo': typeof LoginNgoRoute
+  '/login/public': typeof LoginPublicRoute
+  '/login/volunteer': typeof LoginVolunteerRoute
   '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
   '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
   '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/ngo/create': typeof DashboardNgoCreateRoute
   '/dashboard/ngo/issues': typeof DashboardNgoIssuesRoute
+  '/dashboard/ngo/map': typeof DashboardNgoMapRoute
   '/dashboard/ngo/reports': typeof DashboardNgoReportsRoute
+  '/dashboard/volunteer/map': typeof DashboardVolunteerMapRoute
   '/dashboard/volunteer/profile': typeof DashboardVolunteerProfileRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/ngo/': typeof DashboardNgoIndexRoute
@@ -152,17 +194,23 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/issues': typeof IssuesRoute
-  '/login': typeof LoginRoute
+  '/login': typeof LoginRouteWithChildren
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
   '/dashboard/messages': typeof DashboardMessagesRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/ngo': typeof LoginNgoRoute
+  '/login/public': typeof LoginPublicRoute
+  '/login/volunteer': typeof LoginVolunteerRoute
   '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
   '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
   '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/ngo/create': typeof DashboardNgoCreateRoute
   '/dashboard/ngo/issues': typeof DashboardNgoIssuesRoute
+  '/dashboard/ngo/map': typeof DashboardNgoMapRoute
   '/dashboard/ngo/reports': typeof DashboardNgoReportsRoute
+  '/dashboard/volunteer/map': typeof DashboardVolunteerMapRoute
   '/dashboard/volunteer/profile': typeof DashboardVolunteerProfileRoute
   '/dashboard/admin': typeof DashboardAdminIndexRoute
   '/dashboard/ngo': typeof DashboardNgoIndexRoute
@@ -174,17 +222,23 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/issues': typeof IssuesRoute
-  '/login': typeof LoginRoute
+  '/login': typeof LoginRouteWithChildren
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
   '/dashboard/messages': typeof DashboardMessagesRoute
+  '/login/admin': typeof LoginAdminRoute
+  '/login/ngo': typeof LoginNgoRoute
+  '/login/public': typeof LoginPublicRoute
+  '/login/volunteer': typeof LoginVolunteerRoute
   '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
   '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
   '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/ngo/create': typeof DashboardNgoCreateRoute
   '/dashboard/ngo/issues': typeof DashboardNgoIssuesRoute
+  '/dashboard/ngo/map': typeof DashboardNgoMapRoute
   '/dashboard/ngo/reports': typeof DashboardNgoReportsRoute
+  '/dashboard/volunteer/map': typeof DashboardVolunteerMapRoute
   '/dashboard/volunteer/profile': typeof DashboardVolunteerProfileRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/ngo/': typeof DashboardNgoIndexRoute
@@ -201,13 +255,19 @@ export interface FileRouteTypes {
     | '/report'
     | '/volunteers'
     | '/dashboard/messages'
+    | '/login/admin'
+    | '/login/ngo'
+    | '/login/public'
+    | '/login/volunteer'
     | '/dashboard/admin/analytics'
     | '/dashboard/admin/issues'
     | '/dashboard/admin/self-healing'
     | '/dashboard/admin/users'
     | '/dashboard/ngo/create'
     | '/dashboard/ngo/issues'
+    | '/dashboard/ngo/map'
     | '/dashboard/ngo/reports'
+    | '/dashboard/volunteer/map'
     | '/dashboard/volunteer/profile'
     | '/dashboard/admin/'
     | '/dashboard/ngo/'
@@ -222,13 +282,19 @@ export interface FileRouteTypes {
     | '/report'
     | '/volunteers'
     | '/dashboard/messages'
+    | '/login/admin'
+    | '/login/ngo'
+    | '/login/public'
+    | '/login/volunteer'
     | '/dashboard/admin/analytics'
     | '/dashboard/admin/issues'
     | '/dashboard/admin/self-healing'
     | '/dashboard/admin/users'
     | '/dashboard/ngo/create'
     | '/dashboard/ngo/issues'
+    | '/dashboard/ngo/map'
     | '/dashboard/ngo/reports'
+    | '/dashboard/volunteer/map'
     | '/dashboard/volunteer/profile'
     | '/dashboard/admin'
     | '/dashboard/ngo'
@@ -243,13 +309,19 @@ export interface FileRouteTypes {
     | '/report'
     | '/volunteers'
     | '/dashboard/messages'
+    | '/login/admin'
+    | '/login/ngo'
+    | '/login/public'
+    | '/login/volunteer'
     | '/dashboard/admin/analytics'
     | '/dashboard/admin/issues'
     | '/dashboard/admin/self-healing'
     | '/dashboard/admin/users'
     | '/dashboard/ngo/create'
     | '/dashboard/ngo/issues'
+    | '/dashboard/ngo/map'
     | '/dashboard/ngo/reports'
+    | '/dashboard/volunteer/map'
     | '/dashboard/volunteer/profile'
     | '/dashboard/admin/'
     | '/dashboard/ngo/'
@@ -261,7 +333,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   IssuesRoute: typeof IssuesRoute
-  LoginRoute: typeof LoginRoute
+  LoginRoute: typeof LoginRouteWithChildren
   ReportRoute: typeof ReportRoute
   VolunteersRoute: typeof VolunteersRoute
   DashboardMessagesRoute: typeof DashboardMessagesRoute
@@ -271,7 +343,9 @@ export interface RootRouteChildren {
   DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
   DashboardNgoCreateRoute: typeof DashboardNgoCreateRoute
   DashboardNgoIssuesRoute: typeof DashboardNgoIssuesRoute
+  DashboardNgoMapRoute: typeof DashboardNgoMapRoute
   DashboardNgoReportsRoute: typeof DashboardNgoReportsRoute
+  DashboardVolunteerMapRoute: typeof DashboardVolunteerMapRoute
   DashboardVolunteerProfileRoute: typeof DashboardVolunteerProfileRoute
   DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
   DashboardNgoIndexRoute: typeof DashboardNgoIndexRoute
@@ -323,6 +397,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login/volunteer': {
+      id: '/login/volunteer'
+      path: '/volunteer'
+      fullPath: '/login/volunteer'
+      preLoaderRoute: typeof LoginVolunteerRouteImport
+      parentRoute: typeof LoginRoute
+    }
+    '/login/public': {
+      id: '/login/public'
+      path: '/public'
+      fullPath: '/login/public'
+      preLoaderRoute: typeof LoginPublicRouteImport
+      parentRoute: typeof LoginRoute
+    }
+    '/login/ngo': {
+      id: '/login/ngo'
+      path: '/ngo'
+      fullPath: '/login/ngo'
+      preLoaderRoute: typeof LoginNgoRouteImport
+      parentRoute: typeof LoginRoute
+    }
+    '/login/admin': {
+      id: '/login/admin'
+      path: '/admin'
+      fullPath: '/login/admin'
+      preLoaderRoute: typeof LoginAdminRouteImport
+      parentRoute: typeof LoginRoute
+    }
     '/dashboard/messages': {
       id: '/dashboard/messages'
       path: '/dashboard/messages'
@@ -365,11 +467,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardVolunteerProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/volunteer/map': {
+      id: '/dashboard/volunteer/map'
+      path: '/dashboard/volunteer/map'
+      fullPath: '/dashboard/volunteer/map'
+      preLoaderRoute: typeof DashboardVolunteerMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/ngo/reports': {
       id: '/dashboard/ngo/reports'
       path: '/dashboard/ngo/reports'
       fullPath: '/dashboard/ngo/reports'
       preLoaderRoute: typeof DashboardNgoReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/ngo/map': {
+      id: '/dashboard/ngo/map'
+      path: '/dashboard/ngo/map'
+      fullPath: '/dashboard/ngo/map'
+      preLoaderRoute: typeof DashboardNgoMapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/ngo/issues': {
@@ -417,11 +533,27 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LoginRouteChildren {
+  LoginAdminRoute: typeof LoginAdminRoute
+  LoginNgoRoute: typeof LoginNgoRoute
+  LoginPublicRoute: typeof LoginPublicRoute
+  LoginVolunteerRoute: typeof LoginVolunteerRoute
+}
+
+const LoginRouteChildren: LoginRouteChildren = {
+  LoginAdminRoute: LoginAdminRoute,
+  LoginNgoRoute: LoginNgoRoute,
+  LoginPublicRoute: LoginPublicRoute,
+  LoginVolunteerRoute: LoginVolunteerRoute,
+}
+
+const LoginRouteWithChildren = LoginRoute._addFileChildren(LoginRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   IssuesRoute: IssuesRoute,
-  LoginRoute: LoginRoute,
+  LoginRoute: LoginRouteWithChildren,
   ReportRoute: ReportRoute,
   VolunteersRoute: VolunteersRoute,
   DashboardMessagesRoute: DashboardMessagesRoute,
@@ -431,7 +563,9 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardAdminUsersRoute: DashboardAdminUsersRoute,
   DashboardNgoCreateRoute: DashboardNgoCreateRoute,
   DashboardNgoIssuesRoute: DashboardNgoIssuesRoute,
+  DashboardNgoMapRoute: DashboardNgoMapRoute,
   DashboardNgoReportsRoute: DashboardNgoReportsRoute,
+  DashboardVolunteerMapRoute: DashboardVolunteerMapRoute,
   DashboardVolunteerProfileRoute: DashboardVolunteerProfileRoute,
   DashboardAdminIndexRoute: DashboardAdminIndexRoute,
   DashboardNgoIndexRoute: DashboardNgoIndexRoute,
@@ -441,3 +575,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
