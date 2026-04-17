@@ -10,7 +10,7 @@ export interface AuthUser {
 
 interface AuthContextValue {
   user: AuthUser | null;
-  login: (role: Role) => void;
+  login: (role: Role, name?: string, email?: string) => void;
   logout: () => void;
 }
 
@@ -38,10 +38,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = (role: Role) => {
+  const login = (role: Role, name?: string, email?: string) => {
     const u: AuthUser = {
-      name: defaultName[role],
-      email: `${role}@saarthi.ai`,
+      name: name || defaultName[role],
+      email: email || `${role}@saarthi.ai`,
       role,
     };
     setUser(u);
@@ -73,4 +73,34 @@ export const ROLE_HOME: Record<Role, string> = {
   ngo: "/dashboard/ngo",
   volunteer: "/dashboard/volunteer",
   public: "/dashboard/public",
+};
+
+export const ROLE_LOGIN: Record<Role, string> = {
+  admin: "/login/admin",
+  ngo: "/login/ngo",
+  volunteer: "/login/volunteer",
+  public: "/login/public",
+};
+
+export const ROLE_META: Record<Role, { title: string; tagline: string; accent: string }> = {
+  admin: {
+    title: "Admin Portal",
+    tagline: "Platform-wide oversight, self-healing controls, and user management.",
+    accent: "from-primary to-primary/80",
+  },
+  ngo: {
+    title: "NGO Portal",
+    tagline: "Manage issues, dispatch volunteers, and track outcomes in real time.",
+    accent: "from-emerald-600 to-primary",
+  },
+  volunteer: {
+    title: "Volunteer Portal",
+    tagline: "View your tasks, update progress, and coordinate with your NGO.",
+    accent: "from-accent to-amber-500",
+  },
+  public: {
+    title: "Citizen Portal",
+    tagline: "Report issues by form, IVR call, or WhatsApp — and track resolution.",
+    accent: "from-sky-500 to-primary",
+  },
 };
