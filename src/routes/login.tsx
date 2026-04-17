@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { Shield, Building2, HandHeart, User, ArrowRight, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
@@ -64,6 +64,12 @@ const ROLES: RoleCard[] = [
 ];
 
 function LoginChoice() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
+  if (pathname !== "/login") {
+    return <Outlet />;
+  }
+
   return (
     <SiteLayout>
       <section className="relative overflow-hidden bg-section py-16 sm:py-24">
