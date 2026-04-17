@@ -14,7 +14,8 @@ function parseValue(v: string): { num: number; suffix: string; prefix: string } 
 function CountUp({ value }: { value: string }) {
   const { num, suffix, prefix } = parseValue(value);
   const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState(0);
+  // Start at the final number so SSR shows the real value, then animate on the client.
+  const [display, setDisplay] = useState(num);
   const startedRef = useRef(false);
 
   useEffect(() => {
