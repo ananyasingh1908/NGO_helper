@@ -15,7 +15,15 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as IssuesRouteImport } from './routes/issues'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardMessagesRouteImport } from './routes/dashboard.messages'
+import { Route as DashboardVolunteerIndexRouteImport } from './routes/dashboard.volunteer.index'
+import { Route as DashboardPublicIndexRouteImport } from './routes/dashboard.public.index'
+import { Route as DashboardNgoIndexRouteImport } from './routes/dashboard.ngo.index'
 import { Route as DashboardAdminIndexRouteImport } from './routes/dashboard.admin.index'
+import { Route as DashboardVolunteerProfileRouteImport } from './routes/dashboard.volunteer.profile'
+import { Route as DashboardNgoReportsRouteImport } from './routes/dashboard.ngo.reports'
+import { Route as DashboardNgoIssuesRouteImport } from './routes/dashboard.ngo.issues'
+import { Route as DashboardNgoCreateRouteImport } from './routes/dashboard.ngo.create'
 import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
 import { Route as DashboardAdminSelfHealingRouteImport } from './routes/dashboard.admin.self-healing'
 import { Route as DashboardAdminIssuesRouteImport } from './routes/dashboard.admin.issues'
@@ -51,9 +59,50 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardMessagesRoute = DashboardMessagesRouteImport.update({
+  id: '/dashboard/messages',
+  path: '/dashboard/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardVolunteerIndexRoute = DashboardVolunteerIndexRouteImport.update({
+  id: '/dashboard/volunteer/',
+  path: '/dashboard/volunteer/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardPublicIndexRoute = DashboardPublicIndexRouteImport.update({
+  id: '/dashboard/public/',
+  path: '/dashboard/public/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardNgoIndexRoute = DashboardNgoIndexRouteImport.update({
+  id: '/dashboard/ngo/',
+  path: '/dashboard/ngo/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardAdminIndexRoute = DashboardAdminIndexRouteImport.update({
   id: '/dashboard/admin/',
   path: '/dashboard/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardVolunteerProfileRoute =
+  DashboardVolunteerProfileRouteImport.update({
+    id: '/dashboard/volunteer/profile',
+    path: '/dashboard/volunteer/profile',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DashboardNgoReportsRoute = DashboardNgoReportsRouteImport.update({
+  id: '/dashboard/ngo/reports',
+  path: '/dashboard/ngo/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardNgoIssuesRoute = DashboardNgoIssuesRouteImport.update({
+  id: '/dashboard/ngo/issues',
+  path: '/dashboard/ngo/issues',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardNgoCreateRoute = DashboardNgoCreateRouteImport.update({
+  id: '/dashboard/ngo/create',
+  path: '/dashboard/ngo/create',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardAdminUsersRoute = DashboardAdminUsersRouteImport.update({
@@ -85,11 +134,19 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
+  '/dashboard/messages': typeof DashboardMessagesRoute
   '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
   '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
   '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
+  '/dashboard/ngo/create': typeof DashboardNgoCreateRoute
+  '/dashboard/ngo/issues': typeof DashboardNgoIssuesRoute
+  '/dashboard/ngo/reports': typeof DashboardNgoReportsRoute
+  '/dashboard/volunteer/profile': typeof DashboardVolunteerProfileRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
+  '/dashboard/ngo/': typeof DashboardNgoIndexRoute
+  '/dashboard/public/': typeof DashboardPublicIndexRoute
+  '/dashboard/volunteer/': typeof DashboardVolunteerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -98,11 +155,19 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
+  '/dashboard/messages': typeof DashboardMessagesRoute
   '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
   '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
   '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
+  '/dashboard/ngo/create': typeof DashboardNgoCreateRoute
+  '/dashboard/ngo/issues': typeof DashboardNgoIssuesRoute
+  '/dashboard/ngo/reports': typeof DashboardNgoReportsRoute
+  '/dashboard/volunteer/profile': typeof DashboardVolunteerProfileRoute
   '/dashboard/admin': typeof DashboardAdminIndexRoute
+  '/dashboard/ngo': typeof DashboardNgoIndexRoute
+  '/dashboard/public': typeof DashboardPublicIndexRoute
+  '/dashboard/volunteer': typeof DashboardVolunteerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -112,11 +177,19 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
+  '/dashboard/messages': typeof DashboardMessagesRoute
   '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
   '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
   '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
+  '/dashboard/ngo/create': typeof DashboardNgoCreateRoute
+  '/dashboard/ngo/issues': typeof DashboardNgoIssuesRoute
+  '/dashboard/ngo/reports': typeof DashboardNgoReportsRoute
+  '/dashboard/volunteer/profile': typeof DashboardVolunteerProfileRoute
   '/dashboard/admin/': typeof DashboardAdminIndexRoute
+  '/dashboard/ngo/': typeof DashboardNgoIndexRoute
+  '/dashboard/public/': typeof DashboardPublicIndexRoute
+  '/dashboard/volunteer/': typeof DashboardVolunteerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,11 +200,19 @@ export interface FileRouteTypes {
     | '/login'
     | '/report'
     | '/volunteers'
+    | '/dashboard/messages'
     | '/dashboard/admin/analytics'
     | '/dashboard/admin/issues'
     | '/dashboard/admin/self-healing'
     | '/dashboard/admin/users'
+    | '/dashboard/ngo/create'
+    | '/dashboard/ngo/issues'
+    | '/dashboard/ngo/reports'
+    | '/dashboard/volunteer/profile'
     | '/dashboard/admin/'
+    | '/dashboard/ngo/'
+    | '/dashboard/public/'
+    | '/dashboard/volunteer/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -140,11 +221,19 @@ export interface FileRouteTypes {
     | '/login'
     | '/report'
     | '/volunteers'
+    | '/dashboard/messages'
     | '/dashboard/admin/analytics'
     | '/dashboard/admin/issues'
     | '/dashboard/admin/self-healing'
     | '/dashboard/admin/users'
+    | '/dashboard/ngo/create'
+    | '/dashboard/ngo/issues'
+    | '/dashboard/ngo/reports'
+    | '/dashboard/volunteer/profile'
     | '/dashboard/admin'
+    | '/dashboard/ngo'
+    | '/dashboard/public'
+    | '/dashboard/volunteer'
   id:
     | '__root__'
     | '/'
@@ -153,11 +242,19 @@ export interface FileRouteTypes {
     | '/login'
     | '/report'
     | '/volunteers'
+    | '/dashboard/messages'
     | '/dashboard/admin/analytics'
     | '/dashboard/admin/issues'
     | '/dashboard/admin/self-healing'
     | '/dashboard/admin/users'
+    | '/dashboard/ngo/create'
+    | '/dashboard/ngo/issues'
+    | '/dashboard/ngo/reports'
+    | '/dashboard/volunteer/profile'
     | '/dashboard/admin/'
+    | '/dashboard/ngo/'
+    | '/dashboard/public/'
+    | '/dashboard/volunteer/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -167,11 +264,19 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ReportRoute: typeof ReportRoute
   VolunteersRoute: typeof VolunteersRoute
+  DashboardMessagesRoute: typeof DashboardMessagesRoute
   DashboardAdminAnalyticsRoute: typeof DashboardAdminAnalyticsRoute
   DashboardAdminIssuesRoute: typeof DashboardAdminIssuesRoute
   DashboardAdminSelfHealingRoute: typeof DashboardAdminSelfHealingRoute
   DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
+  DashboardNgoCreateRoute: typeof DashboardNgoCreateRoute
+  DashboardNgoIssuesRoute: typeof DashboardNgoIssuesRoute
+  DashboardNgoReportsRoute: typeof DashboardNgoReportsRoute
+  DashboardVolunteerProfileRoute: typeof DashboardVolunteerProfileRoute
   DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
+  DashboardNgoIndexRoute: typeof DashboardNgoIndexRoute
+  DashboardPublicIndexRoute: typeof DashboardPublicIndexRoute
+  DashboardVolunteerIndexRoute: typeof DashboardVolunteerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -218,11 +323,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/messages': {
+      id: '/dashboard/messages'
+      path: '/dashboard/messages'
+      fullPath: '/dashboard/messages'
+      preLoaderRoute: typeof DashboardMessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/volunteer/': {
+      id: '/dashboard/volunteer/'
+      path: '/dashboard/volunteer'
+      fullPath: '/dashboard/volunteer/'
+      preLoaderRoute: typeof DashboardVolunteerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/public/': {
+      id: '/dashboard/public/'
+      path: '/dashboard/public'
+      fullPath: '/dashboard/public/'
+      preLoaderRoute: typeof DashboardPublicIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/ngo/': {
+      id: '/dashboard/ngo/'
+      path: '/dashboard/ngo'
+      fullPath: '/dashboard/ngo/'
+      preLoaderRoute: typeof DashboardNgoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/admin/': {
       id: '/dashboard/admin/'
       path: '/dashboard/admin'
       fullPath: '/dashboard/admin/'
       preLoaderRoute: typeof DashboardAdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/volunteer/profile': {
+      id: '/dashboard/volunteer/profile'
+      path: '/dashboard/volunteer/profile'
+      fullPath: '/dashboard/volunteer/profile'
+      preLoaderRoute: typeof DashboardVolunteerProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/ngo/reports': {
+      id: '/dashboard/ngo/reports'
+      path: '/dashboard/ngo/reports'
+      fullPath: '/dashboard/ngo/reports'
+      preLoaderRoute: typeof DashboardNgoReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/ngo/issues': {
+      id: '/dashboard/ngo/issues'
+      path: '/dashboard/ngo/issues'
+      fullPath: '/dashboard/ngo/issues'
+      preLoaderRoute: typeof DashboardNgoIssuesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/ngo/create': {
+      id: '/dashboard/ngo/create'
+      path: '/dashboard/ngo/create'
+      fullPath: '/dashboard/ngo/create'
+      preLoaderRoute: typeof DashboardNgoCreateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/admin/users': {
@@ -263,11 +424,19 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ReportRoute: ReportRoute,
   VolunteersRoute: VolunteersRoute,
+  DashboardMessagesRoute: DashboardMessagesRoute,
   DashboardAdminAnalyticsRoute: DashboardAdminAnalyticsRoute,
   DashboardAdminIssuesRoute: DashboardAdminIssuesRoute,
   DashboardAdminSelfHealingRoute: DashboardAdminSelfHealingRoute,
   DashboardAdminUsersRoute: DashboardAdminUsersRoute,
+  DashboardNgoCreateRoute: DashboardNgoCreateRoute,
+  DashboardNgoIssuesRoute: DashboardNgoIssuesRoute,
+  DashboardNgoReportsRoute: DashboardNgoReportsRoute,
+  DashboardVolunteerProfileRoute: DashboardVolunteerProfileRoute,
   DashboardAdminIndexRoute: DashboardAdminIndexRoute,
+  DashboardNgoIndexRoute: DashboardNgoIndexRoute,
+  DashboardPublicIndexRoute: DashboardPublicIndexRoute,
+  DashboardVolunteerIndexRoute: DashboardVolunteerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
