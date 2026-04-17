@@ -16,7 +16,7 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-2 lg:px-8 lg:py-40">
-        <div className="text-background">
+        <div className="text-background animate-[fade-in_0.7s_ease-out]">
           <span className="inline-flex items-center gap-2 rounded-full bg-background/10 px-3 py-1 text-xs font-medium text-background backdrop-blur">
             <Heart className="h-3.5 w-3.5 text-accent" /> Saarthi AI · Smart Resource Allocation
           </span>
@@ -32,17 +32,17 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-card"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-card transition-transform hover:-translate-y-0.5"
             >
               <Link to="/report">
-                Report an Issue <ArrowRight className="ml-1 h-4 w-4" />
+                Report an Issue <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="border-background/40 bg-background/5 text-background hover:bg-background/15"
+              className="border-background/40 bg-background/5 text-background hover:bg-background/15 transition-transform hover:-translate-y-0.5"
             >
               <Link to="/login">Get Involved</Link>
             </Button>
@@ -60,7 +60,7 @@ export function Hero() {
                   key={src}
                   src={src}
                   alt=""
-                  className="h-9 w-9 rounded-full border-2 border-background object-cover"
+                  className="h-9 w-9 rounded-full border-2 border-background object-cover transition hover:scale-110 hover:z-10"
                 />
               ))}
             </div>
