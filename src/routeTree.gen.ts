@@ -15,6 +15,11 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as IssuesRouteImport } from './routes/issues'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardAdminIndexRouteImport } from './routes/dashboard.admin.index'
+import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
+import { Route as DashboardAdminSelfHealingRouteImport } from './routes/dashboard.admin.self-healing'
+import { Route as DashboardAdminIssuesRouteImport } from './routes/dashboard.admin.issues'
+import { Route as DashboardAdminAnalyticsRouteImport } from './routes/dashboard.admin.analytics'
 
 const VolunteersRoute = VolunteersRouteImport.update({
   id: '/volunteers',
@@ -46,6 +51,32 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardAdminIndexRoute = DashboardAdminIndexRouteImport.update({
+  id: '/dashboard/admin/',
+  path: '/dashboard/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAdminUsersRoute = DashboardAdminUsersRouteImport.update({
+  id: '/dashboard/admin/users',
+  path: '/dashboard/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAdminSelfHealingRoute =
+  DashboardAdminSelfHealingRouteImport.update({
+    id: '/dashboard/admin/self-healing',
+    path: '/dashboard/admin/self-healing',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DashboardAdminIssuesRoute = DashboardAdminIssuesRouteImport.update({
+  id: '/dashboard/admin/issues',
+  path: '/dashboard/admin/issues',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAdminAnalyticsRoute = DashboardAdminAnalyticsRouteImport.update({
+  id: '/dashboard/admin/analytics',
+  path: '/dashboard/admin/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +85,11 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
+  '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
+  '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
+  '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
+  '/dashboard/admin/': typeof DashboardAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +98,11 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
+  '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
+  '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
+  '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
+  '/dashboard/admin': typeof DashboardAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,12 +112,39 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/report': typeof ReportRoute
   '/volunteers': typeof VolunteersRoute
+  '/dashboard/admin/analytics': typeof DashboardAdminAnalyticsRoute
+  '/dashboard/admin/issues': typeof DashboardAdminIssuesRoute
+  '/dashboard/admin/self-healing': typeof DashboardAdminSelfHealingRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
+  '/dashboard/admin/': typeof DashboardAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/issues' | '/login' | '/report' | '/volunteers'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/issues'
+    | '/login'
+    | '/report'
+    | '/volunteers'
+    | '/dashboard/admin/analytics'
+    | '/dashboard/admin/issues'
+    | '/dashboard/admin/self-healing'
+    | '/dashboard/admin/users'
+    | '/dashboard/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/issues' | '/login' | '/report' | '/volunteers'
+  to:
+    | '/'
+    | '/about'
+    | '/issues'
+    | '/login'
+    | '/report'
+    | '/volunteers'
+    | '/dashboard/admin/analytics'
+    | '/dashboard/admin/issues'
+    | '/dashboard/admin/self-healing'
+    | '/dashboard/admin/users'
+    | '/dashboard/admin'
   id:
     | '__root__'
     | '/'
@@ -85,6 +153,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/report'
     | '/volunteers'
+    | '/dashboard/admin/analytics'
+    | '/dashboard/admin/issues'
+    | '/dashboard/admin/self-healing'
+    | '/dashboard/admin/users'
+    | '/dashboard/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,6 +167,11 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ReportRoute: typeof ReportRoute
   VolunteersRoute: typeof VolunteersRoute
+  DashboardAdminAnalyticsRoute: typeof DashboardAdminAnalyticsRoute
+  DashboardAdminIssuesRoute: typeof DashboardAdminIssuesRoute
+  DashboardAdminSelfHealingRoute: typeof DashboardAdminSelfHealingRoute
+  DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
+  DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -140,6 +218,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/admin/': {
+      id: '/dashboard/admin/'
+      path: '/dashboard/admin'
+      fullPath: '/dashboard/admin/'
+      preLoaderRoute: typeof DashboardAdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/admin/users': {
+      id: '/dashboard/admin/users'
+      path: '/dashboard/admin/users'
+      fullPath: '/dashboard/admin/users'
+      preLoaderRoute: typeof DashboardAdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/admin/self-healing': {
+      id: '/dashboard/admin/self-healing'
+      path: '/dashboard/admin/self-healing'
+      fullPath: '/dashboard/admin/self-healing'
+      preLoaderRoute: typeof DashboardAdminSelfHealingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/admin/issues': {
+      id: '/dashboard/admin/issues'
+      path: '/dashboard/admin/issues'
+      fullPath: '/dashboard/admin/issues'
+      preLoaderRoute: typeof DashboardAdminIssuesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/admin/analytics': {
+      id: '/dashboard/admin/analytics'
+      path: '/dashboard/admin/analytics'
+      fullPath: '/dashboard/admin/analytics'
+      preLoaderRoute: typeof DashboardAdminAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -150,7 +263,21 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ReportRoute: ReportRoute,
   VolunteersRoute: VolunteersRoute,
+  DashboardAdminAnalyticsRoute: DashboardAdminAnalyticsRoute,
+  DashboardAdminIssuesRoute: DashboardAdminIssuesRoute,
+  DashboardAdminSelfHealingRoute: DashboardAdminSelfHealingRoute,
+  DashboardAdminUsersRoute: DashboardAdminUsersRoute,
+  DashboardAdminIndexRoute: DashboardAdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
