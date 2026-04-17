@@ -19,7 +19,7 @@ import {
   Map,
   Phone,
 } from "lucide-react";
-import { useAuth, ROLE_LOGIN, type Role } from "@/lib/auth";
+import { useAuth, type Role } from "@/lib/auth";
 import { NOTIFICATIONS } from "@/lib/mock-data";
 
 interface NavItem {
@@ -76,8 +76,6 @@ export function DashboardLayout({ children, title, subtitle }: { children: React
   useEffect(() => {
     if (!user) navigate({ to: "/login" });
   }, [user, navigate]);
-  // suppress unused warning if not used elsewhere
-  void ROLE_LOGIN;
 
   useEffect(() => {
     setOpen(false);
