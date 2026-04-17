@@ -1,13 +1,25 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Send, Search, Phone, Video } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { useAuth, ROLE_HOME } from "@/lib/auth";
 import { MESSAGES } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/dashboard/messages")({
   head: () => ({ meta: [{ title: "Messages — Saarthi AI" }] }),
-  component: MessagesPage,
+  component: MessagesGuarded,
 });
+
+function MessagesGuarded() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) navigate({ to: "/login" });
+    else if (user.role === "public") navigate({ to: ROLE_HOME.public });
+  }, [user, navigate]);
+  if (!user || user.role === "public") return null;
+  return <MessagesPage />;
+}
 
 const CONTACTS = [
   { name: "Helping Hands NGO", last: "Great! 42 packets…", time: "10:24", unread: 2, online: true },
